@@ -1,0 +1,30 @@
+body, html {
+	width: 100%;
+	height: 100%;
+	background-color: $background-color;
+	position: relative;
+}
+
+#images {
+	visibility: hidden;
+	display: block;
+	position: relative;
+	margin:0 auto;
+	padding:0;
+	max-width: $column-width;
+
+	.lazy {
+		display: block;
+		position: relative;
+		margin: 0 auto;
+		padding: 0;
+		max-width: 100%;
+		height:auto;
+
+	}
+}
+
+img
+{
+  background: url(../images/checker.png);
+}

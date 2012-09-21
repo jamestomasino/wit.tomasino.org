@@ -1,0 +1,10 @@
+source :rubygems
+source "http://rubygems.org"
+gem 'susy'
+gem 'compass'
+gem 'sass'
+gem 'guard'
+gem 'rb-fsevent'
+gem 'guard-compass'
+gem 'guard-livereload'
+gem 'yajl-ruby'
