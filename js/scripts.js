@@ -6,6 +6,12 @@ var idRegEx = /.*\/\/.*\/[0-9]*\/([0-9]*)/g;
 function parseData ( json ) {
 	data = json;
 	$.each(data.photoset.photo, parsePhoto );
+
+	$('#loading').hide();
+	$('#images').css('visibility', 'visible');
+	$(".lazy").lazyload({
+		effect : "fadeIn"
+	});
 }
 
 function parsePhoto ( i, photo ) {
@@ -38,17 +44,6 @@ function parsePhoto ( i, photo ) {
 						photo.addClass('tall');
 					}
 					photo.attr('data-original', source);
-				}
-				else
-				{
-					console.log ('poop');
-				}
-
-				totalImages--;
-				if (totalImages == 0)
-				{
-					$('#loading').hide();
-					$('#images').css('visibility', 'visible');
 
 					$(".lazy").lazyload({
 						effect : "fadeIn"
