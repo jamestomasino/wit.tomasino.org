@@ -39,7 +39,7 @@ function parsePhoto ( i, photo ) {
 					photo.attr('data-original', source);
 
 					--totalImages;
-					console.log (totalImages);
+					if (window && window.console && window.console.log ) console.log (totalImages);
 
 					if (totalImages < 1)
 					{
@@ -62,7 +62,7 @@ function parsePhoto ( i, photo ) {
 		if (foundLarge === false) {
 			// No Large Image, cleanup
 			--totalImages;
-			console.log (totalImages, 'No Large');
+			if (window && window.console && window.console.log ) console.log (totalImages, 'No Large');
 			photo.remove();
 		}
 
@@ -70,7 +70,7 @@ function parsePhoto ( i, photo ) {
 }
 
 function parseSizes ( json ) {
-	console.log (json);
+	if (window && window.console && window.console.log ) console.log (json);
 	die();
 }
 
