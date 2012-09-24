@@ -16,16 +16,16 @@ function parsePhoto ( i, photo ) {
 
 	$.getJSON ( imageAPI, function ( json ) {
 		var sizelist = json.sizes.size;
+		var foundLarge = false;
+		var photo = $('#photo' + id );
 
 		var j = sizelist.length; while (j--) {
 
 			if (sizelist[j].label == "Large" ) {
-
+				foundLarge = true;
 				var width = parseInt ( sizelist[j].width, 10 );
 				var height = parseInt ( sizelist[j].height, 10 );
 				var source = sizelist[j].source;
-
-				var photo = $('#photo' + id );
 
 				if (photo)
 				{
@@ -40,7 +40,8 @@ function parsePhoto ( i, photo ) {
 
 					--totalImages;
 					console.log (totalImages);
-					if (totalImages < 2)
+
+					if (totalImages < 1)
 					{
 						$('#loading').hide();
 						$('#images').css('visibility', 'visible');
@@ -55,7 +56,16 @@ function parsePhoto ( i, photo ) {
 				}
 				return;
 			}
+
 		}
+
+		if (foundLarge === false) {
+			// No Large Image, cleanup
+			--totalImages;
+			console.log (totalImages, 'No Large');
+			photo.remove();
+		}
+
 	});
 }
 
