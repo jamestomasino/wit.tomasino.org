@@ -39,7 +39,6 @@ function parsePhoto ( i, photo ) {
 					photo.attr('data-original', source);
 
 					--totalImages;
-					if (window && window.console && window.console.log ) console.log (totalImages);
 
 					if (totalImages < 1)
 					{
@@ -51,7 +50,7 @@ function parsePhoto ( i, photo ) {
 					}
 					else
 					{
-						$('#loading').append('.');
+						updateCompletion();
 					}
 				}
 				return;
@@ -62,16 +61,15 @@ function parsePhoto ( i, photo ) {
 		if (foundLarge === false) {
 			// No Large Image, cleanup
 			--totalImages;
-			if (window && window.console && window.console.log ) console.log (totalImages, 'No Large');
+			updateCompletion();
 			photo.remove();
 		}
 
 	});
 }
 
-function parseSizes ( json ) {
-	if (window && window.console && window.console.log ) console.log (json);
-	die();
+function updateCompletion ( ) {
+
 }
 
 $(function() {

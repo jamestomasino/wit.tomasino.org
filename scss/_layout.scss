@@ -24,7 +24,14 @@ body, html {
 	}
 }
 
-img
-{
+img {
   background: #000;
+}
+
+#loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 50%;
+	margin: -10px 0 0 -10px;
 }
