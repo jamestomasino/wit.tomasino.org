@@ -1,10 +1,11 @@
 var setAPI = "http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&photoset_id=72157631261275342&per_page=500&page=1&api_key=c3c9b8e45305233bb97e431394dfb082&jsoncallback=?";
 var data;
 var totalImages = 0;
+var remainingImages = 0;
 
 function parseData ( json ) {
 	data = json;
-	totalImages = data.photoset.photo.length;
+	remainingImages = totalImages = data.photoset.photo.length;
 	$.each(data.photoset.photo.reverse(), parsePhoto );
 }
 
@@ -38,9 +39,9 @@ function parsePhoto ( i, photo ) {
 					}
 					photo.attr('data-original', source);
 
-					--totalImages;
+					--remainingImages;
 
-					if (totalImages < 1)
+					if (remainingImages < 1)
 					{
 						$('#loading').hide();
 						$('#images').css('visibility', 'visible');
@@ -60,7 +61,7 @@ function parsePhoto ( i, photo ) {
 
 		if (foundLarge === false) {
 			// No Large Image, cleanup
-			--totalImages;
+			--remainingImages;
 			updateCompletion();
 			photo.remove();
 		}
@@ -69,7 +70,8 @@ function parsePhoto ( i, photo ) {
 }
 
 function updateCompletion ( ) {
-
+	var perc = Math.round ( ( totalImages - remainingImages ) / totalImages * 100 );
+	$('#perc').text(perc);
 }
 
 $(function() {
