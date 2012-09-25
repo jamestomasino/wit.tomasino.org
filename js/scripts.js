@@ -70,7 +70,8 @@ function parsePhoto ( i, photo ) {
 }
 
 function updateCompletion ( ) {
-	var perc = Math.round ( ( totalImages - remainingImages ) / totalImages * 100 );
+	var perc = String ( Math.round ( ( totalImages - remainingImages ) / totalImages * 100 ) );
+	if (perc.length == 1) perc = '0' + perc;
 	$('#perc').text(perc);
 }
 
