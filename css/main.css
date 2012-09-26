@@ -61,6 +61,10 @@ body, html {
   position: relative;
 }
 
+img {
+  background: #000;
+}
+
 #images {
   visibility: hidden;
   display: block;
@@ -77,31 +81,12 @@ body, html {
   max-width: 100%;
   height: auto;
 }
-
-img {
-  background: #000;
-}
-
-#loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50%;
-  margin: -10px 0 0 -10px;
-}
-
-#perc {
-  position: relative;
-  display: block;
-  margin: 5px 0;
-}
-
-a {
+#images a {
   display: block;
   text-decoration: none;
   position: relative;
 }
-a:hover:before, a:focus:before {
+#images a:hover:before, #images a:focus:before {
   position: relative;
   background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0)));
   background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
@@ -114,6 +99,19 @@ a:hover:before, a:focus:before {
   padding-top: 8px;
   margin-bottom: -68px;
   z-index: 5;
+}
+
+#loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  margin: -10px 0 0 -10px;
+}
+#loading span {
+  position: relative;
+  display: block;
+  margin: 5px 0;
 }
 
 #perc {
