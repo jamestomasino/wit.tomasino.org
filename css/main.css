@@ -117,17 +117,22 @@ a:hover:before, a:focus:before {
 }
 
 #perc {
-  color: #777777;
+  font-family: "Hoefler Text", Baskerville, Garamond, "Palatino Linotype", Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 a:hover:before, a:focus:before {
-  font-family: Baskerville, Garamond, Palatino, "Palatino Linotype", "Hoefler Text", "Times New Roman", serif;
   content: attr(data-label);
+  font-family: "Hoefler Text", Baskerville, Garamond, "Palatino Linotype", Georgia, "Times New Roman", serif;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0.1em;
   color: rgba(255, 255, 255, 0.4);
   font-size: 20px;
   font-weight: normal;
   font-variant: small-caps;
-  letter-spacing: 0.1em;
   line-height: 30px;
   text-align: center;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
 }
