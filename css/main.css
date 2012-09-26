@@ -101,14 +101,18 @@ a {
   text-decoration: none;
   position: relative;
 }
-
 a:hover:before, a:focus:before {
   position: relative;
-  background: rgba(255, 255, 255, 0.4);
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0, 0, 0, 0.4)), color-stop(100%, rgba(0, 0, 0, 0)));
+  background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  background-image: -o-linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
   display: block;
   width: 100%;
-  height: 30px;
-  margin-bottom: -30px;
+  height: 60px;
+  padding-top: 8px;
+  margin-bottom: -68px;
   z-index: 5;
 }
 
@@ -117,10 +121,13 @@ a:hover:before, a:focus:before {
 }
 
 a:hover:before, a:focus:before {
-  font-family: Arial, “Helvetica Neue”, Helvetica, sans-serif;
+  font-family: Baskerville, Garamond, Palatino, "Palatino Linotype", "Hoefler Text", "Times New Roman", serif;
   content: attr(data-label);
-  color: rgba(0, 0, 0, 0.7);
-  font-weight: bold;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 20px;
+  font-weight: normal;
+  font-variant: small-caps;
+  letter-spacing: 0.1em;
   line-height: 30px;
   text-align: center;
 }
