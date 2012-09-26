@@ -96,6 +96,31 @@ img {
   margin: 5px 0;
 }
 
+a {
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+a:hover:before, a:focus:before {
+  position: relative;
+  background: rgba(255, 255, 255, 0.4);
+  display: block;
+  width: 100%;
+  height: 30px;
+  margin-bottom: -30px;
+  z-index: 5;
+}
+
 #perc {
   color: #777777;
+}
+
+a:hover:before, a:focus:before {
+  font-family: Arial, “Helvetica Neue”, Helvetica, sans-serif;
+  content: attr(data-label);
+  color: rgba(0, 0, 0, 0.7);
+  font-weight: bold;
+  line-height: 30px;
+  text-align: center;
 }

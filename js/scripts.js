@@ -11,8 +11,11 @@ function parseData ( json ) {
 
 function parsePhoto ( i, photo ) {
 	var id = photo.id;
+	var title = photo.title;
+	title = title.replace ("'", "");
+	title = title.replace ('"', '');
 	var a_href = "http://www.flickr.com/photos/" + data.photoset.owner + "/" + photo.id + "/";
-	$("<img class='lazy' src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' />").attr('id', "photo" + photo.id).appendTo("#images").wrap(("<a href='" + a_href + "'></a>"));
+	$("<img class='lazy' src='data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7' />").attr('id', "photo" + photo.id).appendTo("#images").wrap(("<a href='" + a_href + "' data-label='" + title + "'></a>"));
 	var imageAPI = "http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&format=json&api_key=c3c9b8e45305233bb97e431394dfb082&photo_id=" + photo.id + "&jsoncallback=?";
 
 	$.getJSON ( imageAPI, function ( json ) {
@@ -40,6 +43,7 @@ function parsePhoto ( i, photo ) {
 					photo.attr('data-original', source);
 
 					--remainingImages;
+					updateCompletion();
 
 					if (remainingImages < 1)
 					{
@@ -48,10 +52,6 @@ function parsePhoto ( i, photo ) {
 						$(".lazy").lazyload({
 							effect : "fadeIn"
 						});
-					}
-					else
-					{
-						updateCompletion();
 					}
 				}
 				return;
