@@ -1,7 +1,8 @@
 require "susy"
+require "sassy-buttons"
 
 module Sass::Script::Functions
-    def getRandomColor()
+    def randomColor()
         Sass::Script::String.new("#%06x" % (rand * 0xffffff))
     end
 end
@@ -22,6 +23,6 @@ project_type     = :stand_alone
 environment      = :development
 output_style     = :expanded
 relative_assets  = true
-line_comments    = false
+line_comments    = true
 disable_warnings = false
 preferred_syntax = :scss

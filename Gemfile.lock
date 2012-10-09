@@ -1,9 +1,13 @@
 GEM
   remote: http://rubygems.org/
-  remote: http://rubygems.org/
   specs:
     addressable (2.3.2)
     chunky_png (1.2.6)
+    closure-compiler (1.1.7)
+    coffee-script (2.2.0)
+      coffee-script-source
+      execjs
+    coffee-script-source (1.3.3)
     compass (0.12.2)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
@@ -12,10 +16,21 @@ GEM
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
     eventmachine (1.0.0)
+    execjs (1.4.0)
+      multi_json (~> 1.0)
     fssm (0.2.9)
+    growl (1.0.3)
+    growl_notify (0.0.3)
+      rb-appscript
     guard (1.3.2)
       listen (>= 0.4.2)
       thor (>= 0.14.6)
+    guard-bundler (1.0.0)
+      bundler (~> 1.0)
+      guard (~> 1.1)
+    guard-coffeescript (1.2.0)
+      coffee-script (>= 2.2.0)
+      guard (>= 1.1.0)
     guard-compass (0.0.6)
       compass (>= 0.10.5)
       guard (>= 0.2.1)
@@ -23,25 +38,56 @@ GEM
       em-websocket (>= 0.2.0)
       guard (>= 1.1.0)
       multi_json (~> 1.0)
+    guard-sprockets (0.4.0)
+      guard (>= 1.1.0)
+      sprockets (~> 2.0)
+    hike (1.2.1)
     listen (0.5.1)
     multi_json (1.3.6)
+    rack (1.4.1)
+    rb-appscript (0.6.1)
     rb-fsevent (0.9.1)
+    ruby_gntp (0.3.4)
     sass (3.2.1)
+    sassy-buttons (0.1.4)
+      compass (>= 0.12.2)
+      sass (>= 3.2.0)
+    sprocketize (0.1)
+      sprockets (>= 2.1.2)
+    sprockets (2.6.0)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
     susy (1.0.1)
       compass (>= 0.12.2)
       sass (>= 3.2.0)
     thor (0.16.0)
+    tilt (1.3.3)
+    uglifier (1.3.0)
+      execjs (>= 0.3.0)
+      multi_json (~> 1.0, >= 1.0.2)
     yajl-ruby (1.1.0)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  closure-compiler
   compass
+  growl
+  growl_notify
   guard
+  guard-bundler
+  guard-coffeescript
   guard-compass
   guard-livereload
+  guard-sprockets
   rb-fsevent
+  ruby_gntp
   sass
+  sassy-buttons
+  sprocketize
   susy
+  uglifier
   yajl-ruby

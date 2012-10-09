@@ -2,10 +2,13 @@
 @import "compass";
 @import "compass/reset";
 @import "compass/css3";
-@import "compass/css3/text-shadow";
+@import "compass/typography/vertical_rhythm";
 
-// Custom
+// Plugins
+@import "sassy-buttons";
+
+// Project 
+@import "lib/lib";
 @import "variables";
-@import "layout";
-@import "type";
-
+@import "layout/layout";
+@import "type/type";
