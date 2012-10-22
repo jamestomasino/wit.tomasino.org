@@ -1,9 +1,5 @@
-// Example of library includes
-//= require lib/modernizr
 //= require lib/jquery-1.8.2
 //= require lib/jquery.lazyload.min
-//= require lib/l10n
-
 
 var setAPI = "http://api.flickr.com/services/rest/?format=json&method=flickr.photosets.getPhotos&photoset_id=72157631261275342&per_page=500&page=1&api_key=c3c9b8e45305233bb97e431394dfb082&jsoncallback=?";
 var data;
