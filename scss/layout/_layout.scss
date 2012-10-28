@@ -8,6 +8,30 @@ body, html {
 img {
   background: #000;
 }
+#info {
+	display: none;
+	@include background-image(linear-gradient($light-grad-1, $light-grad-2));
+	height: 18px;
+	padding: 5px;
+	text-align: center;
+
+	.age {
+		display: block;
+
+		.label{
+			padding: 0 3px;
+		}
+
+		.value {
+			padding: 0 3px;
+		}
+
+		.units {
+			padding: 0 3px;
+		}
+
+	}
+}
 
 #images {
 	visibility: hidden;
@@ -25,13 +49,13 @@ img {
 		max-width: 100%;
 		height:auto;
 	}
-	
+
 	a {
 		display: block;
 		text-decoration: none;
 		position: relative;
-		
-		&:hover:before, 
+
+		&:hover:before,
 		&:focus:before
 		{
 			position: relative;
