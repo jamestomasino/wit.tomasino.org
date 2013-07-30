@@ -8,8 +8,8 @@ body, html {
 img {
   background: #000;
 }
+
 #info {
-	display: none;
 	@include background-image(linear-gradient($light-grad-1, $light-grad-2));
 	height: 18px;
 	padding: 5px;
@@ -34,14 +34,13 @@ img {
 }
 
 #images {
-	visibility: hidden;
 	display: block;
 	position: relative;
 	margin:0 auto;
 	padding:0;
 	max-width: $column-width;
 
-	.lazy {
+	img {
 		display: block;
 		position: relative;
 		margin: 0 auto;

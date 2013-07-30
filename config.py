@@ -6,16 +6,13 @@ class Config:
     _con = None
 
     def __init__(self):
-        print lite.version
         if (self._api_key == '' and self._api_secret == ''):
             with open('config.txt') as config:
                 config_data = [x.strip().split(':') for x in config.readlines()]
             for key,value in config_data:
                 if (key == 'API_KEY'):
-                    print 'api key: ' + value
                     self._api_key = value
                 elif (key == 'API_SECRET'):
-                    print 'api secret: ' + value
                     self._api_secret = value
         self.load_all()
 
@@ -25,8 +22,7 @@ class Config:
 
             cur = con.cursor()
             cur.execute('SELECT SQLITE_VERSION()')
-            data = cur.fetchone()
-            print "SQLite version: %s" % data
+            #data = cur.fetchone()
             #if hasattr(self.session, 'oauth_token'):
             #self._oauth_token = self.session.oauth_token
         pass
