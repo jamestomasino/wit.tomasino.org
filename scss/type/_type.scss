@@ -15,16 +15,6 @@
 .age {
 	@include fontStack;
 	color: $dark-text-color;
-
-	.label{
-	}
-
-	.value {
-	}
-
-	.units {
-
-	}
 }
 
 a:hover:before, a:focus:before
