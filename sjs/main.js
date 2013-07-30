@@ -1,28 +1,9 @@
 //= require lib/jquery-1.8.2
-//= require lib/jquery-paged-scroll
+
+isScrollListenerActive = false;
+page = 0;
 
 $(function() {
-
-	$('#images').paged_scroll({
-		handleScroll:function (page, container, doneCallback) {
-			console.log ('handleScroll:', page, container);
-			getPage(page);
-			doneCallback();
-		},
-		triggerFromBottom:'30px',
-		loading : {
-				html  : '<div class="paged-scroll-loading"><img alt="Loading..." src="images/ajax-loader.gif" /></div>'
-		},
-		targetElement:$('#images'),
-		startPage:0,
-		pagesToScroll:null,
-		useScrollOptimization:true,
-		checkScrollChange:500,
-		monitorChangeInterval:300,
-		monitorTargetChange:true,
-		debug:true
-	});
-
 	// Show age
 	var witBDay = new Date ( 2012, 7, 19 );
 	var today = new Date ();
@@ -48,12 +29,12 @@ $(function() {
 		ageHTML.append(yearsHTML);
 
 	$('#info').html(ageHTML);
-	getPage(0);
+	getPage(page);
+
 });
 
 function getPage ( page ) {
 	$.getJSON ('flickr.py?page=' + page, function (data) {
-		console.log (data);
 		var photos = data.photos;
 		for (var i=0; i < photos.length; ++i ) {
 			var photo = photos[i];
@@ -66,6 +47,26 @@ function getPage ( page ) {
 			ahref.append(img);
 			$('#images').append(ahref);
 		}
+		if (!isScrollListenerActive) {
+			$('#loading').hide();
+			setTimeout( addScrollListener, 2000 );
+		}
 	})
+}
+
+function addScrollListener () {
+	isScrollListenerActive = true;
+	$(window).scroll(checkScroll);
+}
+
+function checkScroll () {
+	if (isScrollListenerActive) {
+		if($(window).scrollTop() + $(window).height() > $(document).height() - 100) {
+			isScrollListenerActive = false;
+			page ++;
+			$('#loading').show();
+			getPage(page);
+		}
+	}
 }
 
