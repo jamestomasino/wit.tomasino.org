@@ -3,6 +3,8 @@
 import flickrapi
 from config import Config
 import os
+import sqlite3 as lite
+
 try:
     import json
 except:
@@ -14,6 +16,23 @@ page = 0
 photos_per_page = 5
 query_params = {}
 photo_list = []
+
+def load_all():
+    #con = lite.connect('web.db')
+    #with con:
+        #cur = con.cursor()
+        #cur.execute('SELECT SQLITE_VERSION()')
+        #data = cur.fetchone()
+        #if hasattr(self.session, 'oauth_token'):
+        #self._oauth_token = self.session.oauth_token
+    pass
+
+def save_all():
+    # Check if table exists
+    #   If not, make it - http://stackoverflow.com/questions/5801170/python-sqlite-create-table-if-not-exists-problem
+    # Clear the rows from the table (DELETE FROM tablename)
+    # Store all the data we've pulled down into the table
+    pass
 
 
 # Get Query Parameters
@@ -37,6 +56,7 @@ photo_num_end = photo_num_start + photos_per_page
 
 # Load API info
 config = Config()
+load_all()
 
 # Flickr API Requests
 flickr = flickrapi.FlickrAPI(config.get_api_key(), config.get_api_secret())
