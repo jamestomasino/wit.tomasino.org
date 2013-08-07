@@ -38,9 +38,6 @@ def get_source_from_master(id):
             return photo['source']
 
 def save_all():
-
-    # Restart connection in case we just created the table
-    # - http://stackoverflow.com/questions/5801170/python-sqlite-create-table-if-not-exists-problem
     con = lite.connect('web.db')
     cur = con.cursor()
     with con:
@@ -63,7 +60,7 @@ try:
 except Exception:
     pass
 
-# Create the damn database
+# Create the database, then close the connection to avoid bug
 con = lite.connect('web.db')
 cur = con.cursor()
 sql = 'CREATE TABLE IF NOT EXISTS photos ( Id TEXT PRIMARY KEY, Source TEXT, Title TEXT, Owner TEXT )'
