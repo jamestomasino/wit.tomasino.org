@@ -42,8 +42,8 @@ def save_all():
     cur = con.cursor()
     with con:
         for photo_data in photo_list:
-            sql = "INSERT OR REPLACE INTO photos (Id, Source, Title, Owner) VALUES('" + photo_data['photo_id'] + "','" + photo_data["source"] + "','" + photo_data["photo_title"] + "','" + photo_data["photo_owner"] + "' )"
-            cur.execute(sql)
+            sql = "INSERT OR REPLACE INTO photos (Id, Source, Title, Owner) VALUES(?, ?, ?, ?)"
+            cur.execute(sql, (photo_data['photo_id'], photo_data["source"], photo_data["photo_title"], photo_data["photo_owner"]))
 
 # Get Query Parameters
 try:
