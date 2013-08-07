@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/bin/env python
 
 import flickrapi
 from config import Config
@@ -28,12 +28,21 @@ def load_all():
     pass
 
 def save_all():
-    # Check if table exists
-    #   If not, make it - http://stackoverflow.com/questions/5801170/python-sqlite-create-table-if-not-exists-problem
-    # Clear the rows from the table (DELETE FROM tablename)
-    # Store all the data we've pulled down into the table
-    pass
+    con = lite.connect('web.db')
+    cur = con.cursor()
+    sql = 'CREATE TABLE IF NOT EXISTS photos ( Id TEXT PRIMARY KEY, Source TEXT, Title TEXT, Owner TEXT )'
+    cur.execute(sql)
+    con.commit()
+    con.close()
 
+    # Restart connection in case we just created the table
+    # - http://stackoverflow.com/questions/5801170/python-sqlite-create-table-if-not-exists-problem
+    con = lite.connect('web.db')
+    cur = con.cursor()
+    with con:
+        for photo_data in photo_list:
+            sql = "INSERT OR REPLACE INTO photos (Id, Source, Title, Owner) VALUES('" + photo_data['photo_id'] + "','" + photo_data["source"] + "','" + photo_data["photo_title"] + "','" + photo_data["photo_owner"] + "' )"
+            cur.execute(sql)
 
 # Get Query Parameters
 try:
@@ -76,6 +85,8 @@ for photo in rev_set[photo_num_start:photo_num_end]:
                 photo_data['source'] = size.get('source')
                 break
     photo_list.append(photo_data)
+
+save_all()
 
 json_wrapper = { 'photos' : photo_list }
 print json.dumps(json_wrapper)

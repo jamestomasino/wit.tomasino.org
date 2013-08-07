@@ -6,3 +6,4 @@ js/main.js.gz
 js/preload.js
 js/preload.js.gz
 Gemfile.lock
+web.db
