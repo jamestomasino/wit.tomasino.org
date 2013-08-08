@@ -3,7 +3,6 @@
 import flickrapi
 from config import Config
 import os
-import sqlite3 as lite
 
 try:
     import json
@@ -16,34 +15,6 @@ page = 0
 photos_per_page = 5
 query_params = {}
 photo_list = []
-photo_master_list = []
-
-def load_all():
-    con = lite.connect('web.db')
-    cur = con.cursor()
-    with con:
-        cur.execute('SELECT Id, Source, Title, Owner FROM photos')
-        rows = cur.fetchall()
-        for row in rows:
-            photo_master_data = {}
-            photo_master_data['photo_id'] = row[0]
-            photo_master_data['source'] = row[1]
-            photo_master_data['photo_title'] = row[2]
-            photo_master_data['owner'] = row[3]
-            photo_master_list.append(photo_master_data)
-
-def get_source_from_master(id):
-    for photo in photo_master_list:
-        if (id == photo['photo_id'] ):
-            return photo['source']
-
-def save_all():
-    con = lite.connect('web.db')
-    cur = con.cursor()
-    with con:
-        for photo_data in photo_list:
-            sql = "INSERT OR REPLACE INTO photos (Id, Source, Title, Owner) VALUES(?, ?, ?, ?)"
-            cur.execute(sql, (photo_data['photo_id'], photo_data["source"], photo_data["photo_title"], photo_data["photo_owner"]))
 
 # Get Query Parameters
 try:
@@ -60,34 +31,32 @@ try:
 except Exception:
     pass
 
-# Create the database, then close the connection to avoid bug
-con = lite.connect('web.db')
-cur = con.cursor()
-sql = 'CREATE TABLE IF NOT EXISTS photos ( Id TEXT PRIMARY KEY, Source TEXT, Title TEXT, Owner TEXT )'
-cur.execute(sql)
-con.commit()
-con.close()
-
 # Calculate start and end photo to request
 photo_num_start = page * photos_per_page
 photo_num_end = photo_num_start + photos_per_page
 
 # Load API info
 config = Config()
-load_all()
+config.load_all()
 
 # Flickr API Requests
 flickr = flickrapi.FlickrAPI(config.get_api_key(), config.get_api_secret())
-set = flickr.walk_set('72157631261275342', 500)
+set = flickr.walk_set(config.get_set_id(), 500)
+
 # reverse the set list
 rev_set = list(set)[::-1]
 
 for photo in rev_set[photo_num_start:photo_num_end]:
     photo_data = {}
+    # get basic data from api
     photo_data['photo_id'] = photo.get('id')
-    photo_data['photo_owner'] = '64735379@N00' #hardcoded, but whatever
     photo_data['photo_title'] = photo.get('title')
-    photo_data['source'] = get_source_from_master(photo_data['photo_id'])
+
+    # get owner from config
+    photo_data['photo_owner'] = config.get_user_id()
+
+    # get source from DB, or else make api request
+    photo_data['source'] = config.get_source_from_master(photo_data['photo_id'])
     if ( photo_data['source'] == None ):
         size_container = flickr.photos_getSizes(photo_id=photo_data['photo_id'])
         for size_list in size_container:
@@ -97,7 +66,9 @@ for photo in rev_set[photo_num_start:photo_num_end]:
                     break
     photo_list.append(photo_data)
 
-save_all()
+# store everything we just got in the DB
+config.save_all(photo_list)
 
+# format for output
 json_wrapper = { 'photos' : photo_list }
 print json.dumps(json_wrapper)
