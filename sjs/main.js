@@ -3,18 +3,22 @@
 isScrollListenerActive = false;
 page = 0;
 
+var bDayYear = 2012;
+var bDayMonth = 8; // August
+var bDayDate = 19;
+
 $(function() {
 	// Show age
-	var witBDay = new Date ( 2012, 7, 19 );
+	var witBDay = new Date ( bDayYear, bDayMonth - 1, bDayDate );
 	var today = new Date ();
 	var age = today - witBDay;
 	var weeks = Math.floor(age / 604800000);
 	var years = Math.floor(age / 31536000000);
-	var months;
-    months = (today.getFullYear() - witBDay.getFullYear()) * 12;
-    months -= today.getMonth();
-    months += witBDay.getMonth();
-	months = Math.abs(months);
+
+	// Compensate for the birthday on the 19th and calculate months
+	var wM = new Date( witBDay - (1000 * 60 * 60 * 24 * (bDayDate - 1)) );
+	var tM = new Date( today - (1000 * 60 * 60 * 24 * (bDayDate - 1)) );
+	var months = tM.getMonth() - wM.getMonth() + (12 * ( tM.getFullYear() - wM.getFullYear()));
 
 	var ageHTML = $('<div class="age"></div>');
 	var weeksHTML = $('<span class="label">Age:</span><span class="value">' + weeks + '</span><span class="units">weeks</span>');
