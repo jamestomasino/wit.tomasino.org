@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Vimeo Stream</title>
+	<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+
+		var FEED="http://vimeo.com/jamestomasino/videos/rss";
+		var VIDEO_URLS = [];
+
+		$(document).ready(function () {
+			parseRSS (FEED);
+		});
+
+		function parseRSS(url, callback) {
+			$.ajax({
+				url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=100&callback=?&q=' + encodeURIComponent(url),
+				dataType: 'jsonp',
+				success: function(data) {
+					processFeed (data.responseData.feed);
+				}
+			});
+		}
+
+		function processFeed ( feed ) {
+			var entries = feed.entries;
+			for ( var i = 0; i < entries.length; ++i ) {
+				VIDEO_URLS.push ( entries[i].link );
+			}
+			// Start to process all videos
+			addVideo ();
+		}
+
+		function addVideo() {
+			if (VIDEO_URLS.length) {
+				var videoUrl = VIDEO_URLS.shift();
+				var url = 'http://www.vimeo.com/api/oembed.json?url=' + encodeURIComponent(videoUrl) + '&callback=embedVideo&width=640';
+				$.ajax({
+					url: url,
+					dataType: 'jsonp',
+					success: embedVideo
+				});
+			}
+		}
+
+		// This function puts the video on the page
+		function embedVideo(video) {
+			var vidHolder = $('<div class="vid"></div>');
+			vidHolder.html( unescape(video.html) );
+			$('#wrapper').append(vidHolder);
+			// Load Next Video
+			addVideo();
+		}
+
+    </script>
+</head>
+<body>
+
+    <div id="wrapper"></div>
+
+</body>
+</html>
