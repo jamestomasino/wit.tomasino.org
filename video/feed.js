@@ -1,4 +1,4 @@
-var FEED="http://vimeo.com/jamestomasino/videos/rss";
+var FEED="http://vimeo.com/album/2286122/rss";
 var LOAD_INTERVAL = 3;
 var NUM_LOADED = 0;
 var VIDEO_URLS = [];
@@ -21,7 +21,7 @@ function parseRSS(url, callback) {
 function processFeed ( feed ) {
 	var entries = feed.entries;
 	for ( var i = 0; i < entries.length; ++i ) {
-		VIDEO_URLS.push ( entries[i].link );
+		VIDEO_URLS.unshift ( entries[i].link ); // Replace with push if videos in other order
 	}
 	addVideo ();
 }
