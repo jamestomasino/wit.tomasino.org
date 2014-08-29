@@ -1,4 +1,5 @@
 var FEED="http://vimeo.com/album/2286122/rss";
+var ord = Number(ord) || Math.floor(Math.random()*10e12);
 var LOAD_INTERVAL = 3;
 var NUM_LOADED = 0;
 var VIDEO_URLS = [];
@@ -10,7 +11,7 @@ $(document).ready(function () {
 
 function parseRSS(url, callback) {
 	$.ajax({
-		url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=100&callback=?&q=' + encodeURIComponent(url),
+		url: document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=100&callback=?&q=' + encodeURIComponent(url) + '&ord=' + ord,
 		dataType: 'jsonp',
 		success: function(data) {
 			processFeed (data.responseData.feed);
@@ -20,9 +21,10 @@ function parseRSS(url, callback) {
 
 function processFeed ( feed ) {
 	var entries = feed.entries;
-	for ( var i = 0; i < entries.length; ++i ) {
-		VIDEO_URLS.unshift ( entries[i].link ); // Replace with push if videos in other order
+	var i = entries.length; while (i--) {
+		VIDEO_URLS.push ( entries[i].link );
 	}
+	console.log (VIDEO_URLS);
 	addVideo ();
 }
 
