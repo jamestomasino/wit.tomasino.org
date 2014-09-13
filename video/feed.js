@@ -1,6 +1,6 @@
 var FEED="http://vimeo.com/album/2286122/rss";
 var ord = Number(ord) || Math.floor(Math.random()*10e12);
-var LOAD_INTERVAL = 3;
+var LOAD_INTERVAL = 6;
 var NUM_LOADED = 0;
 var VIDEO_URLS = [];
 var isScrollListenerActive = false;
