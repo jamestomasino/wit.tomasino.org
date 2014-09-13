@@ -32,7 +32,9 @@ function addVideo() {
 	if (VIDEO_URLS.length) {
 		var videoUrl = VIDEO_URLS.shift();
 		NUM_LOADED++;
-		var url = 'http://www.vimeo.com/api/oembed.json?url=' + encodeURIComponent(videoUrl) + '&callback=embedVideo&width=640';
+		var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
+		width = Math.min(640, width);
+		var url = '//www.vimeo.com/api/oembed.json?url=' + encodeURIComponent(videoUrl) + '&callback=embedVideo&width=' + width;
 		$.ajax({
 			url: url,
 			dataType: 'jsonp',
