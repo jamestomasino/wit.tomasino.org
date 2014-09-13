@@ -7,6 +7,36 @@ a img{border:none}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,summary{display:block}
 body,html{width:100%;height:100%;background-color:#000;position:relative; margin:0; padding:0;}
 a {margin:0; padding:0}
+
+#info {
+	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #cccccc), color-stop(100%, #999999));background-image:-webkit-linear-gradient(#cccccc,#999999);background-image:-moz-linear-gradient(#cccccc,#999999);background-image:-o-linear-gradient(#cccccc,#999999);background-image:linear-gradient(#cccccc,#999999);
+	height: 18px;
+	padding: 5px;
+	z-index: 50;
+	position: relative;
+	text-align: center;
+}
+
+#info .age {
+	font-family: "Hoefler Text", Baskerville, Garamond, "Palatino Linotype", Georgia, "Times New Roman", serif;
+	-webkit-font-smoothing: antialiased;
+	letter-spacing: 0.1em;
+	display: block;
+	color: rgba(50,50,50,0.8);
+}
+
+#info .age .label{
+	padding: 0 3px;
+}
+
+#info .age .value {
+	padding: 0 3px;
+}
+
+#info .age .units {
+	padding: 0 3px;
+}
+
 #wrapper { 
 	display: block;
 	position: relative;
