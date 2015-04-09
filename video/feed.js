@@ -22,7 +22,7 @@ function parseRSS(url, callback) {
 function processFeed ( feed ) {
 	var entries = feed.entries;
 	var i = entries.length; while (i--) {
-		VIDEO_URLS.push ( entries[i].link );
+		VIDEO_URLS.unshift ( entries[i].link );
 	}
 	console.log (VIDEO_URLS);
 	addVideo ();
