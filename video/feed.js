@@ -1,29 +1,19 @@
-var ord = Number(ord) || Math.floor(Math.random()*10e12);
 var LOAD_INTERVAL = 6;
 var NUM_LOADED = 0;
 var VIDEO_URLS = [];
 var isScrollListenerActive = false;
 
-$(document).ready(function () {
-	parseRSS();
-});
+$(document).ready( parseRSS );
 
 function parseRSS() {
-	$.ajax({
-		url: 'feed.php',
-		dataType: 'jsonp',
-		success: function(data) {
-			processFeed (data.responseData.feed);
-		}
-	});
+	$.getJSON( 'feed.php', processFeed );
 }
 
 function processFeed ( feed ) {
-	var entries = feed.entries;
+	var entries = feed.channel.item;
 	var i = entries.length; while (i--) {
 		VIDEO_URLS.unshift ( entries[i].link );
 	}
-	console.log (VIDEO_URLS);
 	addVideo ();
 }
 
